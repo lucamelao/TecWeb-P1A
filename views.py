@@ -1,14 +1,12 @@
 from utils import load_data, load_template, add_note, build_response
 from urllib import parse
 
-def index(request):
-    
+def index(request):    
     # Cria uma lista de <li>'s para cada anotação
-    # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(title=dados['titulo'], details=dados['detalhes'])
-        for dados in load_data('notes.json')
+        note_template.format(title = dados.title, details = dados.content)
+        for dados in load_data()
     ]
     notes = '\n'.join(notes_li)
     
@@ -26,11 +24,8 @@ def index(request):
         # requisição e devolve os parâmetros para desacoplar esta lógica.
         # Dica: use o método split da string e a função unquote_plus
         for chave_valor in corpo.split('&'):
-            # AQUI É COM VOCÊ
             chave, valor = chave_valor.split('=')
             params[parse.unquote_plus(chave)] = parse.unquote_plus(valor)
         add_note(params)
         return build_response(body=load_template('index.html').format(notes=notes), code=303, reason='See Other', headers='Location: /')
-    # O RESTO DO CÓDIGO DA FUNÇÃO index CONTINUA DAQUI PARA BAIXO...
     return build_response(body=load_template('index.html').format(notes=notes))
-    #return load_template('index.html').format(notes=notes).encode()

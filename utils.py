@@ -1,4 +1,6 @@
-import json 
+import json
+import sqlite3
+from database import Database, Note
 
 def extract_route(requisicao):
     if requisicao.startswith('GET'):
@@ -16,17 +18,20 @@ def read_file(path):
     else:
         return(open(path, 'rb').read())
 
-def load_data(filename):
-    return(json.loads(open('data/'+filename, 'rt').read()))
+def load_data():
+    # cria o objeto db para chamada de funções
+    db = Database('Get-it Notes')
+    # método de Database que consulta dados
+    return db.get_all()
 
 def load_template(filename):
     return(open('templates/'+filename).read())
 
 def add_note(new_note):
-    notes = load_data('notes.json')
-    notes.append(new_note)
-    with open('data/notes.json', 'w') as new:
-        json.dump(notes, new)
+    # cria o objeto db para chamada de funções
+    db = Database('Get-it Notes')
+    # adiciona uma nota nova
+    db.add(Note(title = new_note['titulo'], content = new_note['detalhes']))
 
 def build_response(body='', code=200, reason='OK', headers=''):
     if headers=='':
