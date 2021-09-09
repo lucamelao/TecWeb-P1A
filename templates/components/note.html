@@ -1,5 +1,14 @@
-<form class = "card" method = "post">
-  <h3 class = "card-title">
+<div class = "card">
+<form class = "note-delete" method = "post" id = "delete-{id}" action = "/delete"></form>
+<div>
+  <button form = "delete-{id}" class = "deleteX">
+    X
+  </button> 
+  <textarea name = "id" class = "id" form = "delete-{id}" >
+    {id}
+  </textarea>
+</div>
+<h3 class = "card-title">
     {title}
   </h3>
   <div class = "card-content">
@@ -7,4 +16,5 @@
       {details}
     </p>
   </div>
-</form>
+</div>
+  

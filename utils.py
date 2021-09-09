@@ -33,6 +33,12 @@ def add_note(new_note):
     # adiciona uma nota nova
     db.add(Note(title = new_note['titulo'], content = new_note['detalhes']))
 
+def delete_note(id):
+    # cria o objeto db para chamada de funções
+    db = Database('Get-it Notes')
+    # deleta a nota com o id indicado
+    db.delete(id)
+
 def build_response(body='', code=200, reason='OK', headers=''):
     if headers=='':
         return ('HTTP/1.1 '+str(code)+' '+reason+'\n\n'+body).encode()

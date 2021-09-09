@@ -184,3 +184,18 @@ body {
   width: 120%;
   transition: width 0.2s ease-out, padding-top 0.2s ease-out;
 }
+
+.note-delete, .id{
+  display: none;
+}
+
+.deleteX{
+  position: fixed;
+  right: 2%;
+  bottom: 80%;
+  background: transparent;
+  border: transparent;
+  font-weight: bold;
+  font-size: larger;
+  color:red
+}
