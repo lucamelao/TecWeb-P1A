@@ -1,5 +1,8 @@
 <div class = "card">
 <form class = "note-delete" method = "post" id = "delete-{id}" action = "/delete"></form>
+<form class = "note-update" method = "post" id = "update-{id}" action = "/update"></form>
+
+<!-- deleção de notes -->
 <div>
   <button form = "delete-{id}" class = "deleteX">
     X
@@ -8,13 +11,24 @@
     {id}
   </textarea>
 </div>
-<h3 class = "card-title">
+
+<!--edição de notes-->
+<div>
+  <button form = "update-{id}" class = "editIcon" action = "/update">
+    edit
+  </button> 
+  <textarea name = "id" class = "id" form = "update-{id}" >
+    {id}
+  </textarea>
+</div>
+
+<textarea name = "title" class = "card-title" form = "update-{id}">
     {title}
-  </h3>
-  <div class = "card-content">
-    <p>
+  </textarea>
+  <div class = "card-content" form = "update-{id}">
+    <textarea name = "content" form="update-{id}">
       {details}
-    </p>
+    </textarea>
   </div>
 </div>
   
